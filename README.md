@@ -1,4 +1,4 @@
 ld25
 ====
 
-The theme for LD25 is...
+This will (with a little luck) house my LD25 submission in a few days!
