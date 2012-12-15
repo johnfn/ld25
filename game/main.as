@@ -50,6 +50,9 @@ package {
       lg = new LightGrid(m);
       lg.loadNewMap();
 
+
+      lg.addCaster(main.c, 0, 0);
+
       Fathom.start();
       m.visible = true;
     }

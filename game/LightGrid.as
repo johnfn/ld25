@@ -1,9 +1,9 @@
 package {
   public class LightGrid extends Entity {
     private var SIZE:int = C.size;
-    private var casters:Object = {};
+    private var casters:Array = [];
     private var mapRef:Map;
-    private var grid:Array = [];
+    private var intensity:Array = [];
 
     public static var BEHAVIOR_STATIC:int = 0;
     public static var BEHAVIOR_ROTATE:int = 1;
@@ -24,21 +24,16 @@ package {
       this.mapRef = mapRef;
 
       for (var i:int = 0; i < mapRef.widthInTiles; i++) {
-        grid[i] = [];
+        intensity[i] = [];
 
         for (var j:int = 0; j < mapRef.heightInTiles; j++) {
-          setLightAt(i, j, 0.0);
+          intensity[i][j] = LIGHT_POWER;
         }
       }
     }
 
-    private function setLightAt(x:int, y:int, power:Number):void {
-      grid[x][y] = power;
-      graphics.drawRect(x * C.dim.x, y * C.dim.y, C.dim.x, C.dim.y);
-    }
-
     public function addCaster(e:Entity, behavior:int, angle:int, power:int = 15):void {
-      casters.push({"entity" : e, "behavior" : behavior, "angle" : angle});
+      casters.push({"entity" : e, "behavior" : behavior, "angle" : angle, "power": power});
     }
 
     public override function update(e:EntitySet):void {
@@ -46,37 +41,63 @@ package {
       var i:int;
       var j:int;
 
-      graphics.clear();
-      graphics.beginFill(0x000000, LIGHT_POWER);
-      graphics.drawRect(0, 0, width, height);
+      for (i = 0; i < mapRef.widthInTiles; i++) {
+        for (j = 0; j < mapRef.heightInTiles; j++) {
+          intensity[i][j] = LIGHT_POWER;
+        }
+      }
 
-      // Cast ray from every caster
+      graphics.clear();
+      //graphics.beginFill(0x000000, LIGHT_POWER);
+      //graphics.drawRect(0, 0, width, height);
+
+      // Send ray from every caster
 
       for (i = 0; i < casters.length; i++) {
         // Cast rays in a spread in the direction they're looking
+        var caster:Object = casters[i];
 
-        var rayStartAngle:int = casters.angle - SPREAD_ANGLE / 2;
-        var rayEndAngle:int = casters.angle   + SPREAD_ANGLE / 2;
+        var rayStartAngle:int = caster.angle - SPREAD_ANGLE / 2;
+        var rayEndAngle:int = caster.angle   + SPREAD_ANGLE / 2;
         var step:int = SPREAD_ANGLE / RAY_COUNT;
+
 
         // Cast an individual ray
         for (var angle:int = rayStartAngle; angle < rayEndAngle; angle += step) {
-          var curX:int = casters[i].entity.x;
-          var curY:int = casters[i].entity.y;
+          var curX:Number = caster.entity.x;
+          var curY:Number = caster.entity.y;
 
           // Step
-          for (j = 0; j < casters[i].power; j++) {
+          for (j = 0; j < caster.power; j++) {
             curX += Math.cos(angle) * LIGHT_PRECISION;
             curY += Math.sin(angle) * LIGHT_PRECISION;
 
-            grid[curX / C.dim.x][curY / C.dim.y].addAlpha(LIGHT_POWER);
+            var tileX:int = Math.floor(curX / C.dim.x);
+            var tileY:int = Math.floor(curY / C.dim.y);
 
-            if (Fathom.anythingAt(curX, curY)) {
-              return;
+            if (mapRef.outOfBoundsPt(tileX, tileY)) {
+              break;
+            }
+
+            intensity[tileX][tileY] += LIGHT_POWER;
+
+            if (Fathom.anythingAt(tileX, tileY)) {
+              break;
             }
           }
         }
       }
+
+      // Draw grid
+
+      for (i = 0; i < mapRef.widthInTiles; i++) {
+        for (j = 0; j < mapRef.heightInTiles; j++) {
+          graphics.beginFill(0x000000, intensity[i][j]);
+          graphics.drawRect(i * C.dim.x, j * C.dim.y, C.dim.x, C.dim.y);
+        }
+      }
+
+
     }
 
     override public function groups():Set {
