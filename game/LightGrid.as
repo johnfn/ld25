@@ -67,10 +67,13 @@ package {
           var curX:Number = caster.entity.x;
           var curY:Number = caster.entity.y;
 
+          // So rad!
+          var radAngle:Number = angle * Math.PI / 180;
+
           // Step
           for (j = 0; j < caster.power; j++) {
-            curX += Math.cos(angle) * LIGHT_PRECISION;
-            curY += Math.sin(angle) * LIGHT_PRECISION;
+            curX += Math.cos(radAngle) * LIGHT_PRECISION;
+            curY += Math.sin(radAngle) * LIGHT_PRECISION;
 
             var tileX:int = Math.floor(curX / C.dim.x);
             var tileY:int = Math.floor(curY / C.dim.y);
@@ -79,7 +82,7 @@ package {
               break;
             }
 
-            intensity[tileX][tileY] += LIGHT_POWER;
+            intensity[tileX][tileY] -= LIGHT_POWER;
 
             if (Fathom.anythingAt(tileX, tileY)) {
               break;
