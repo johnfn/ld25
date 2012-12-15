@@ -1,4 +1,6 @@
 package {
+  import flash.filters.*;
+
   public class LightGrid extends Entity {
     private var SIZE:int = C.size;
     private var casters:Array = [];
@@ -10,14 +12,18 @@ package {
     public static var BEHAVIOR_PATROL:int = 2;
 
     private static var SPREAD_ANGLE:int    = 45;
-    private static var RAY_COUNT:int       = 5;
+    private static var RAY_COUNT:int       = 9;
     private static var LIGHT_PRECISION:int = C.size; //smaller == more precise
-    private static var LIGHT_POWER:Number  = 0.4; // could be a property of casters.
+    private static var START_DARK:Number   = 0.8;
+    private static var LIGHT_POWER:Number  = 0.2; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
       super(0, 0, mapRef.width, mapRef.height); //TODO
 
       this.mapRef = mapRef;
+
+      var myBlur:BlurFilter = new BlurFilter(30, 30);
+      filters = [myBlur];
     }
 
     public function loadNewMap():void {
@@ -43,7 +49,7 @@ package {
 
       for (i = 0; i < mapRef.widthInTiles; i++) {
         for (j = 0; j < mapRef.heightInTiles; j++) {
-          intensity[i][j] = LIGHT_POWER;
+          intensity[i][j] = START_DARK;
         }
       }
 
