@@ -5,7 +5,7 @@ package {
   import flash.display.MovieClip;
   import flash.display.Shape;
 
-  public class Character extends MovingEntity {
+  public class Character extends MovingEntity implements ILightSource {
     private var mapRef:Map;
     private var dir:Vec = new Vec(0, 0);
     public var journal:Journal;
@@ -63,6 +63,24 @@ package {
       raiseToTop();
     }
 
+    override public function groups():Set {
+      return super.groups().concat("lightsource");
+    }
+
     override public function modes():Array { return [0]; }
+
+    /* ILightSource */
+
+    public function location():Vec {
+      return vec();
+    }
+
+    public function power():int {
+      return 10;
+    }
+
+    public function angle():int {
+      return 0;
+    }
   }
 }

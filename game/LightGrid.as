@@ -3,7 +3,6 @@ package {
 
   public class LightGrid extends Entity {
     private var SIZE:int = C.size;
-    private var casters:Array = [];
     private var mapRef:Map;
     private var intensity:Array = [];
 
@@ -40,14 +39,12 @@ package {
       }
     }
 
-    public function addCaster(e:Entity, behavior:int, angle:int, power:int = 15):void {
-      casters.push({"entity" : e, "behavior" : behavior, "angle" : angle, "power": power});
-    }
-
     public override function update(e:EntitySet):void {
       // Reset lights from last time
       var i:int;
       var j:int;
+
+      var casters:EntitySet = Fathom.entities.get("lightsource");
 
       for (i = 0; i < mapRef.widthInTiles; i++) {
         for (j = 0; j < mapRef.heightInTiles; j++) {
@@ -61,19 +58,17 @@ package {
 
       // Send ray from every caster
 
-      for (i = 0; i < casters.length; i++) {
+      for each (var caster:ILightSource in casters) {
         // Cast rays in a spread in the direction they're looking
-        var caster:Object = casters[i];
-
-        var rayStartAngle:int = caster.angle - SPREAD_ANGLE / 2;
-        var rayEndAngle:int = caster.angle   + SPREAD_ANGLE / 2;
+        var rayStartAngle:int = caster.angle() - SPREAD_ANGLE / 2;
+        var rayEndAngle:int = caster.angle()   + SPREAD_ANGLE / 2;
         var step:int = SPREAD_ANGLE / RAY_COUNT;
 
 
         // Cast an individual ray
         for (var angle:int = rayStartAngle; angle < rayEndAngle; angle += step) {
-          var curX:Number = caster.entity.x;
-          var curY:Number = caster.entity.y;
+          var curX:Number = caster.location().x;
+          var curY:Number = caster.location().y;
 
           // So rad!
           var radAngle:Number = angle * Math.PI / 180;
@@ -82,7 +77,7 @@ package {
           curY += Math.sin(radAngle) * LIGHT_PRECISION;
 
           // Step
-          for (j = 0; j < caster.power; j++) {
+          for (j = 0; j < caster.power(); j++) {
             curX += Math.cos(radAngle) * LIGHT_PRECISION;
             curY += Math.sin(radAngle) * LIGHT_PRECISION;
 

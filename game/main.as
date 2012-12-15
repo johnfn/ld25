@@ -39,7 +39,8 @@ package {
 
       m = new Map(25, 25, C.size).fromImage(MapClass, {
         //(new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
-        (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
+          (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
+        , (new Color(255, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
       }).loadNewMap(new Vec(0, 0));
 
       Fathom._camera.beBoundedBy(m);
@@ -55,8 +56,6 @@ package {
       journal = new Journal();
 
       main.c.journal = journal;
-
-      lg.addCaster(main.c, 0, 0);
 
       Fathom.start();
       m.visible = true;
