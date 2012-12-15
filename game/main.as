@@ -23,6 +23,7 @@ package {
 
     public static var MainObj:main;
     public static var c:Character;
+    public static var lg:LightGrid;
 
     private var m:Map;
 
@@ -45,6 +46,8 @@ package {
       Fathom.mapRef = m;
 
       main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
+
+      lg = new LightGrid(m);
 
       Fathom.start();
       m.visible = true;
