@@ -44,7 +44,7 @@ package {
 
       Fathom.mapRef = m;
 
-      main.c = new Character(2 * 25 + 2, 2 * 25, m);
+      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
 
       Fathom.start();
       m.visible = true;

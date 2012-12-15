@@ -17,6 +17,7 @@ package {
     // Graphics.
     [Embed(source = "../data/map.png")] static public var MapClass:Class;
     [Embed(source = "../data/sprites.png")] static public var SpritesClass:Class;
+    [Embed(source = "../data/blacksquare.png")] static public var BlackSquareClass:Class;
 
     // Physics.
 
