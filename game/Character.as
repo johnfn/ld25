@@ -7,6 +7,7 @@ package {
 
   public class Character extends MovingEntity {
     private var mapRef:Map;
+    private var dir:Vec = new Vec(0, 0);
 
     function Character(x:int, y:int, mapRef:Map) {
       super(x, y, C.size, C.size);
@@ -28,25 +29,16 @@ package {
     private function setCameraFocus():void {
       var focus:Vec = this.rect();
 
+      var signX:int = Util.sign(Util.movementVector().x);
+      var signY:int = Util.sign(Util.movementVector().y);
+
+      if (signX != 0) dir.x = signX;
+      if (signY != 0) dir.y = signY;
+
+      focus.x += dir.x * 100;
+      focus.y += dir.y * 100;
+
       Fathom.camera.follow(focus);
-
-      /*
-      if (Util.movementVector().x > 0) {
-        focus.x += 100;
-      }
-
-      if (Util.movementVector().x < 0) {
-        focus.x -= 100;
-      }
-
-      if (Util.movementVector().y > 0) {
-        focus.y += 100;
-      }
-
-      if (Util.movementVector().y < 0) {
-        focus.y -= 100;
-      }
-      */
     }
 
     override public function update(e:EntitySet):void {
@@ -55,8 +47,6 @@ package {
       vel.setPos(Util.movementVector().multiply(7));
 
       setCameraFocus();
-
-      //face(Util.movementVector().x);
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
     }
