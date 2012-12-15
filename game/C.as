@@ -15,8 +15,8 @@ package {
     public static var fontName:String = "BittyFont";
 
     // Graphics.
-    [Embed(source = "../data/map.jpg")] static public var MapClass:Class;
-    [Embed(source = "../data/sprites.jpg")] static public var SpritesClass:Class;
+    [Embed(source = "../data/map.png")] static public var MapClass:Class;
+    [Embed(source = "../data/sprites.png")] static public var SpritesClass:Class;
 
     // Physics.
 
