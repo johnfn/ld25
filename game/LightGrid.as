@@ -14,14 +14,14 @@ package {
     private static var RAY_COUNT:int       = 9;
     private static var LIGHT_PRECISION:int = C.size; //smaller == more precise
     private static var START_DARK:Number   = 0.8;
-    private static var LIGHT_POWER:Number  = 0.2; // could be a property of casters.
+    private static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
       super(0, 0, mapRef.width, mapRef.height); //TODO
 
       this.mapRef = mapRef;
 
-      var myBlur:BlurFilter = new BlurFilter(30, 30);
+      var myBlur:BlurFilter = new BlurFilter(90, 90);
       filters = [myBlur];
 
       loadNewMap();
