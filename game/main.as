@@ -46,14 +46,15 @@ package {
 
       Fathom.mapRef = m;
 
-      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
+      // The order we create these objects determines depth
 
       lg = new LightGrid(m);
-      lg.loadNewMap();
+
+      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
 
       journal = new Journal();
 
-      journal.display();
+      main.c.journal = journal;
 
       lg.addCaster(main.c, 0, 0);
 

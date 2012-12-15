@@ -24,9 +24,11 @@ package {
 
       var myBlur:BlurFilter = new BlurFilter(30, 30);
       filters = [myBlur];
+
+      loadNewMap();
     }
 
-    public function loadNewMap():void {
+    private function loadNewMap():void {
       this.mapRef = mapRef;
 
       for (var i:int = 0; i < mapRef.widthInTiles; i++) {

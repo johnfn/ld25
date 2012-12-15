@@ -8,6 +8,7 @@ package {
   public class Character extends MovingEntity {
     private var mapRef:Map;
     private var dir:Vec = new Vec(0, 0);
+    public var journal:Journal;
 
     function Character(x:int, y:int, mapRef:Map) {
       super(x, y, C.size, C.size);
@@ -49,6 +50,10 @@ package {
       setCameraFocus();
 
       Hooks.onLeaveMap(this, mapRef, leftMap);
+
+      if (Util.KeyJustDown.J) {
+        journal.show();
+      }
     }
 
     private function leftMap():void {

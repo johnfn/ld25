@@ -9,6 +9,7 @@ package {
   	private var journalMode:int = JOURNAL_LIST;
   	private var numJournals:int;
   	private var selectedJournal:int = 0;
+  	private var currentlySelectedJournal:Boolean = false;
 
   	private var contents:Text;
 
@@ -31,23 +32,38 @@ package {
     	journalsSeen.push(entry);
     }
 
-    public function display():void {
-    	//Fathom.pushMode(C.MODE_JOURNAL);
+    public function show():void {
+    	this.contents.visible = true;
+    	Fathom.pushMode(C.MODE_JOURNAL);
+    }
 
-    	var overviewText:String = "Arrow keys to navigate and enter to select.\n\n";
+    private function renderText():void {
+    	this.visible = true;
 
-    	for (var i:int = 0; i < journalsSeen.length; i++) {
-			if (selectedJournal == i) overviewText += "*";
-			overviewText += i + ": " + C.journalog[journalsSeen[i]][C.JOURNAL_TITLE];
-			if (selectedJournal == i) overviewText += "*";
+    	var overviewText:String;
 
-			overviewText += "\n";
+    	if (!currentlySelectedJournal) {
+	    	overviewText = "Arrow keys to navigate and space to select. J to exit.\n\n";
+
+	    	for (var i:int = 0; i < journalsSeen.length; i++) {
+				if (selectedJournal == i) overviewText += "*";
+				overviewText += i + ": " + C.journalog[journalsSeen[i]][C.JOURNAL_TITLE];
+				if (selectedJournal == i) overviewText += "*";
+
+				overviewText += "\n";
+	    	}
+    	} else {
+	    	overviewText = "Space to return to journal listing. J to leave.\n\n";
+
+	    	overviewText += "*" + C.journalog[selectedJournal][0] + "* \n\n";
+	    	overviewText += C.journalog[selectedJournal].concat().splice(1).join("\n");
     	}
 
     	contents.text = overviewText;
     }
 
     public function hide():void {
+    	this.contents.visible = false;
     	Fathom.popMode();
     }
 
@@ -57,10 +73,23 @@ package {
     	}
 
     	if (Util.KeyJustDown.Up) {
+    		// Adding .length ensures we don't have to deal with modulo inconsistencies in negative numbers.
     		selectedJournal = (selectedJournal - 1 + journalsSeen.length) % journalsSeen.length;
     	}
 
-    	display();
+    	if (Util.KeyJustDown.Space) {
+    		currentlySelectedJournal = !currentlySelectedJournal;
+    	}
+
+    	if (Util.KeyJustDown.J) {
+    		hide();
+    	}
+
+    	renderText();
+    }
+
+    override public function modes():Array {
+    	return [C.MODE_JOURNAL];
     }
 
     override public function groups():Set {
