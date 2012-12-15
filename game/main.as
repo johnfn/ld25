@@ -24,6 +24,7 @@ package {
     public static var MainObj:main;
     public static var c:Character;
     public static var lg:LightGrid;
+    public static var journal:Journal;
 
     private var m:Map;
 
@@ -50,6 +51,9 @@ package {
       lg = new LightGrid(m);
       lg.loadNewMap();
 
+      journal = new Journal();
+
+      journal.display();
 
       lg.addCaster(main.c, 0, 0);
 

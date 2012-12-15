@@ -25,10 +25,23 @@ package {
 
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
-    public static var MODE_INVENTORY:int = 1;
-    public static var MODE_TEXT:int      = 2;
-    public static var MODE_TITLE:int     = 3;
+    public static var MODE_JOURNAL:int   = 1;
 
+    public static var JOURNAL_TITLE:int = 0;
+
+    public static var journalog:Array = [
+        [ "JOURNAL ENTRY #1"
+        , "I've come to. It's dark. Wind rustles through the trees. I don't know where I am."
+        , "..."
+        , "I don't know *who* I am."
+        , "My only clue is a note I found in my pocket. It says the following:"
+        , "'Infiltrate the Manor. Kill Daniel. Don't be seen.'"
+        , "There is no signature."
+        ]
+      , [ "ENTRY #2", "herpderp"]
+      , [ "ENTRY #3", "herplerp"]
+
+    ]
   }
 }
 
