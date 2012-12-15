@@ -20,24 +20,39 @@ package {
       animations.ticksPerFrame = 3;
       */
 
+      this.width -= 2;
+      this.height -= 2;
       this.mapRef = mapRef;
     }
 
     private function setCameraFocus():void {
       var focus:Vec = this.rect();
-      if (facing > 0) {
+
+      Fathom.camera.follow(focus);
+
+      /*
+      if (Util.movementVector().x > 0) {
         focus.x += 100;
-      } else {
+      }
+
+      if (Util.movementVector().x < 0) {
         focus.x -= 100;
       }
 
-      Fathom.camera.follow(focus);
+      if (Util.movementVector().y > 0) {
+        focus.y += 100;
+      }
+
+      if (Util.movementVector().y < 0) {
+        focus.y -= 100;
+      }
+      */
     }
 
     override public function update(e:EntitySet):void {
       super.update(e);
 
-      vel = Util.movementVector().multiply(3);
+      vel.setPos(Util.movementVector().multiply(7));
 
       setCameraFocus();
 
