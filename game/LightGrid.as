@@ -70,6 +70,9 @@ package {
           // So rad!
           var radAngle:Number = angle * Math.PI / 180;
 
+          curX += Math.cos(radAngle) * LIGHT_PRECISION;
+          curY += Math.sin(radAngle) * LIGHT_PRECISION;
+
           // Step
           for (j = 0; j < caster.power; j++) {
             curX += Math.cos(radAngle) * LIGHT_PRECISION;
