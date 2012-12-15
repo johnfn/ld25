@@ -15,17 +15,26 @@ package {
     private static var LIGHT_POWER:Number  = 0.4; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
-      super(0, 0, SIZE, SIZE);
+      super(0, 0, mapRef.width, mapRef.height); //TODO
+
+      this.mapRef = mapRef;
     }
 
-    public function loadNewMap(mapRef:Map):void {
+    public function loadNewMap():void {
       this.mapRef = mapRef;
 
-      for (var i:int = 0; i < mapRef.width; i++) {
-        for (var j:int = 0; j < mapRef.height; j++) {
-          grid[i][j] = new LightSquare(i * mapRef.tileSize, j * mapRef.tileSize);
+      for (var i:int = 0; i < mapRef.widthInTiles; i++) {
+        grid[i] = [];
+
+        for (var j:int = 0; j < mapRef.heightInTiles; j++) {
+          setLightAt(i, j, 0.0);
         }
       }
+    }
+
+    private function setLightAt(x:int, y:int, power:Number):void {
+      grid[x][y] = power;
+      graphics.drawRect(x * C.dim.x, y * C.dim.y, C.dim.x, C.dim.y);
     }
 
     public function addCaster(e:Entity, behavior:int, angle:int, power:int = 15):void {
@@ -37,11 +46,9 @@ package {
       var i:int;
       var j:int;
 
-      for (i = 0; i < mapRef.width; i++) {
-        for (j = 0; j < mapRef.height; j++) {
-          grid[i][j].reset();
-        }
-      }
+      graphics.clear();
+      graphics.beginFill(0x000000, LIGHT_POWER);
+      graphics.drawRect(0, 0, width, height);
 
       // Cast ray from every caster
 
@@ -71,24 +78,9 @@ package {
         }
       }
     }
-  }
-}
 
-class LightSquare extends Entity {
-  function LightSquare(x:int, y:int) {
-    super(x, y, C.size, C.size);
-    loadImage(C.BlackSquareClass);
-  }
-
-  public function reset():void {
-    this.spritesheetObj.alpha = 0;
-  }
-
-  public function addAlpha(amount:Number):void {
-    if (amount + spritesheetObj.alpha > 1) {
-      spritesheetObj.alpha = 1;
-    } else {
-      this.spritesheetObj.alpha += amount;
+    override public function groups():Set {
+      return super.groups().concat("non-blocking");
     }
   }
 }

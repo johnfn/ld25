@@ -48,6 +48,7 @@ package {
       main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
 
       lg = new LightGrid(m);
+      lg.loadNewMap();
 
       Fathom.start();
       m.visible = true;
