@@ -1,5 +1,5 @@
 package {
-  public class EnemyRotating extends Entity implements ILightSource {
+  public class EnemyRotating extends Entity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     private var _angle:int = 90;
 
@@ -8,13 +8,22 @@ package {
     }
 
     override public function groups():Set {
-      return super.groups().concat("lightsource");
+      return super.groups().concat("lightsource", "enemy");
     }
 
     override public function update(e:EntitySet):void {
     	super.update(e);
 
     	_angle -= 5;
+    }
+
+    public function die(type:int):void {
+      if (type == Character.POISON_NEEDLE) {
+        Character.murdered = true;
+        setTile(0, 6);
+      } else {
+        setTile(0, 7);
+      }
     }
 
     /* ILightSource */

@@ -1,5 +1,5 @@
 package {
-  public class EnemyPatrolling extends MovingEntity implements ILightSource {
+  public class EnemyPatrolling extends MovingEntity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     private var _angle:int = 90;
 
@@ -17,7 +17,7 @@ package {
     }
 
     override public function groups():Set {
-      return super.groups().concat("lightsource");
+      return super.groups().concat("lightsource", "enemy");
     }
 
     override public function update(e:EntitySet):void {
@@ -44,6 +44,17 @@ package {
 	    		dir.y *= -1;
 	    	}
     	}
+    }
+
+    /* IKillable */
+
+    public function die(type:int):void {
+      if (type == Character.POISON_NEEDLE) {
+        Character.murdered = true;
+        setTile(2, 6);
+      } else {
+        setTile(2, 7);
+      }
     }
 
     /* ILightSource */

@@ -1,4 +1,3 @@
-
 package {
   import Util;
   import flash.events.Event;
@@ -7,13 +6,15 @@ package {
 
   public class Character extends MovingEntity implements ILightSource {
     private var mapRef:Map;
-    private var dir:Vec = new Vec(0, 0);
+    private var dir:Vec = new Vec(1, 0);
 
-    private static var NO_NEEDLE:int = 0;
-    private static var POISON_NEEDLE:int = 1;
-    private static var TRANQ_NEEDLE:int = 2;
+    public static var murdered:Boolean = false;
 
-    private var needles:int = NO_NEEDLE;
+    public static var NO_NEEDLE:int = 0;
+    public static var POISON_NEEDLE:int = 1;
+    public static var TRANQ_NEEDLE:int = 2;
+
+    private var needles:int = C.DEBUG ? POISON_NEEDLE : NO_NEEDLE;
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
@@ -89,6 +90,14 @@ package {
       _angle = angleVec.angle();
     }
 
+    public function canShootNeedle():Boolean {
+      return (needles != NO_NEEDLE && !canPressSwitch() && !canOpenChest());
+    }
+
+    public function shootNeedle():void {
+      var d:Entity = new Dart(this.x, this.y, needles, dir.clone().multiply(5));
+    }
+
     override public function update(e:EntitySet):void {
       super.update(e);
 
@@ -110,10 +119,10 @@ package {
           new DialogText(C.toggledSwitch);
           (Fathom.entities.get("switch").one() as EnergySwitch).flip();
           EnemyStatic.noPower = true;
-        }
-
-        if (canOpenChest()) {
+        } else if (canOpenChest()) {
           checkForTreasure();
+        } else if (needles != NO_NEEDLE) {
+          shootNeedle();
         }
       }
 

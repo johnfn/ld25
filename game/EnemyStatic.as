@@ -1,5 +1,5 @@
 package {
-  public class EnemyStatic extends Entity implements ILightSource {
+  public class EnemyStatic extends Entity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     public static var noPower:Boolean = false;
 
@@ -12,11 +12,22 @@ package {
     }
 
     override public function groups():Set {
-      return super.groups().concat("lightsource");
+      return super.groups().concat("lightsource", "enemy");
     }
 
     override public function update(e:EntitySet):void {
     	super.update(e);
+    }
+
+    /* IKillable */
+
+    public function die(type:int):void {
+      if (type == Character.POISON_NEEDLE) {
+        setTile(1, 6);
+        Character.murdered = true;
+      } else {
+        setTile(1, 7);
+      }
     }
 
     /* ILightSource */
