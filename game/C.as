@@ -4,7 +4,7 @@ package {
 
     public static var size:int = 25;
     public static var dim:Vec = new Vec(25, 25);
-    public static var DEBUG:Boolean = false;
+    public static var DEBUG:Boolean = true;
 
     // Fonts.
 

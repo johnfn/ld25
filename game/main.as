@@ -44,10 +44,14 @@ package {
       var groundsList:Array = [ new Color(255, 100, 0).toString()
                               , new Color(255, 200, 0).toString()
                               , new Color(0, 255, 0).toString()
+                              , new Color(255, 255, 255).toString()
                               ];
 
       m.fromImage(MapClass, groundsList, {
-          (new Color(0, 0, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true }
+          /* manor walls */
+          (new Color(0, 0, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(8, 8), fixedSize: true, fancyEdges: true }
+          /* manor ceiling */
+        , (new Color(12, 23, 34).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(0, 4), fixedSize: true }
           /* water */
         , (new Color(0, 0, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, "transparent": true }
           /* sewer walls */
@@ -60,6 +64,10 @@ package {
         , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(0, 1) }
         /* Security cam left (sewer) */
         , (new Color(199, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(1, 0) }
+        /* Guard */
+        , (new Color(255, 25, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(0, 1) }
+        /* Guard left */
+        , (new Color(255, 30, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(1, 0) }
         /* power switch (sewer) */
         , (new Color(150, 0, 0).toString()) : { type: EnergySwitch, gfx: C.SpritesClass, spritesheet: new Vec(0, 2), fixedSize: true }
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
