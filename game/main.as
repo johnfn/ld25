@@ -44,7 +44,7 @@ package {
       var groundsList:Array = [ new Color(255, 100, 0).toString()
                               , new Color(255, 200, 0).toString()
                               , new Color(0, 255, 0).toString()
-                              , new Color(255, 255, 255).toString()
+                              , new Color(0, 255, 255).toString()
                               ];
 
       m.fromImage(MapClass, groundsList, {
@@ -52,14 +52,18 @@ package {
           (new Color(0, 0, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(8, 8), fixedSize: true, fancyEdges: true }
           /* manor ceiling */
         , (new Color(12, 23, 34).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(0, 4), fixedSize: true }
+          /* manor ground */
+        , (new Color(0, 255, 255).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(8, 8), fixedSize: true, randoEdges: true, transparent: true }
+          /* manor stone */
+        , (new Color(100, 100, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(1, 4), fixedSize: true }
           /* water */
-        , (new Color(0, 0, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, "transparent": true }
+        , (new Color(0, 0, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, transparent: true }
           /* sewer walls */
         , (new Color(0, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, fancyEdges: true }
         /* trimming along sewer walls */
-        , (new Color(255, 100, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, fancyEdges: true, "transparent": true }
+        , (new Color(255, 100, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, fancyEdges: true, transparent: true }
         /* dirt ground */
-        , (new Color(255, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, randoEdges: true, "transparent": true }
+        , (new Color(255, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, randoEdges: true, transparent: true }
         /* Security cam (sewer) */
         , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(0, 1) }
         /* Security cam left (sewer) */
