@@ -10,7 +10,6 @@ package {
     private var dir:Vec = new Vec(0, 0);
 
     private var restorePt:Vec = new Vec(2, 2);
-    private var restoreMap:Vec = new Vec(0, 0);
     private var lg:LightGrid;
 
     public var journal:Journal;
@@ -64,18 +63,17 @@ package {
       checkForMessage();
 
       if (!lg.isBenign(x, y)) {
-        trace("uh oh!");
+        restoreFromPoint();
       }
     }
 
     private function setRestorePoint():void {
       restorePt = vec();
-      restoreMap = mapRef.getTopLeftCorner();
     }
 
     private function restoreFromPoint():void {
-      mapRef.loadNewMapAbs(restoreMap);
       setPos(restorePt);
+      Fathom.camera.snapTo(this);
     }
 
     private function checkForMessage():void {
@@ -100,6 +98,7 @@ package {
       Fathom.camera.snapTo(this);
 
       raiseToTop();
+      setRestorePoint();
     }
 
     override public function groups():Set {
