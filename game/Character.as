@@ -102,6 +102,7 @@ package {
       }
 
       checkForWarps();
+      checkForTreasure();
     }
 
     private function checkForWarps():void {
@@ -111,6 +112,16 @@ package {
       var warp:Warp = Fathom.entities.get("warp").one() as Warp;
       warp.doWarp(this);
       raiseToTop();
+    }
+
+    private function checkForTreasure():void {
+      if (!Fathom.entities.any("TreasureChest")) return;
+      if (!Fathom.entities.get("TreasureChest").one().touchingRect(this)) return;
+
+      var chest:TreasureChest = Fathom.entities.get("TreasureChest").one() as TreasureChest;
+      var curLoc:Vec = mapRef.getTopLeftCorner().clone().divide(25);
+
+      trace(curLoc);
     }
 
     private function setRestorePoint():void {
