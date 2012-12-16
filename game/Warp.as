@@ -25,7 +25,7 @@ package {
     	return isSourceWarp;
     }
 
-    public function doWarp(c:Character) {
+    public function doWarp(c:Character):void {
     	if (!isSourceWarp) return;
 
     	Fathom.mapRef.loadNewMapAbs(mapDest);

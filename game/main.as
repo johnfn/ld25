@@ -56,6 +56,10 @@ package {
         , (new Color(0, 255, 255).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(8, 8), fixedSize: true, randoEdges: true, transparent: true }
           /* manor stone */
         , (new Color(100, 100, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(1, 4), fixedSize: true }
+
+          /* manor treasurechest */
+        , (new Color(100, 110, 120).toString()) : { type: TreasureChest, gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true }
+
           /* water */
         , (new Color(0, 0, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, transparent: true }
           /* sewer walls */
@@ -72,6 +76,8 @@ package {
         , (new Color(255, 25, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(0, 1) }
         /* Guard left */
         , (new Color(255, 30, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(1, 0) }
+        /* Guard rotating */
+        , (new Color(255, 50, 0).toString()) : { type: EnemyRotating, gfx: C.SpritesClass, spritesheet: new Vec(0, 3), fixedSize: true, args: new Vec(0, 1) }
         /* power switch (sewer) */
         , (new Color(150, 0, 0).toString()) : { type: EnergySwitch, gfx: C.SpritesClass, spritesheet: new Vec(0, 2), fixedSize: true }
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }

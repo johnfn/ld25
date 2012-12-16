@@ -14,7 +14,7 @@ package {
     override public function update(e:EntitySet):void {
     	super.update(e);
 
-    	_angle += 5;
+    	_angle -= 5;
     }
 
     /* ILightSource */
@@ -24,7 +24,7 @@ package {
   	}
 
   	public function power():int {
-  		return 10;
+  		return 20;
   	}
 
   	public function angle():int {
