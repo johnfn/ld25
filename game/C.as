@@ -4,7 +4,6 @@ package {
 
     public static var size:int = 25;
     public static var dim:Vec = new Vec(25, 25);
-
     public static var DEBUG:Boolean = false;
 
     // Fonts.
@@ -73,8 +72,7 @@ package {
     }
 
     public static var warps:Object = {
-      //((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
-      ((new Vec(1, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
+      ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
     };
   }
 }

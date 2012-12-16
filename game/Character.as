@@ -68,7 +68,7 @@ package {
         angleVec = new Vec(signX, signY);
       }
 
-      _angle = Math.atan2(angleVec.y, angleVec.x) * 180.0 / Math.PI;
+      _angle = angleVec.angle();
     }
 
     override public function update(e:EntitySet):void {

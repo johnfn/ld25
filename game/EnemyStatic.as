@@ -3,8 +3,12 @@ package {
     private const SIZE:int = C.size;
     public static var noPower:Boolean = false;
 
-    function EnemyStatic(x:int=0, y:int=0, type:int=0) {
-      super(x, y, SIZE, SIZE);
+    var dir:Vec = new Vec(0, 1);
+
+    function EnemyStatic(dir:Vec) {
+      super(0, 0, SIZE, SIZE);
+
+      this.dir = dir;
     }
 
     override public function groups():Set {
@@ -30,7 +34,7 @@ package {
   	}
 
   	public function angle():int {
-  		return 90;
+  		return dir.angle();
   	}
 
     public function isBenign():Boolean {

@@ -57,7 +57,9 @@ package {
         /* dirt ground */
         , (new Color(255, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, randoEdges: true, "transparent": true }
         /* Security cam (sewer) */
-        , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
+        , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(0, 1) }
+        /* Security cam left (sewer) */
+        , (new Color(199, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(1, 0) }
         /* power switch (sewer) */
         , (new Color(150, 0, 0).toString()) : { type: EnergySwitch, gfx: C.SpritesClass, spritesheet: new Vec(0, 2), fixedSize: true }
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
@@ -65,7 +67,7 @@ package {
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
         /* Stairs up (warp) */
         , (new Color(0, 255, 0).toString()) : { type: Warp, gfx: C.SpritesClass, spritesheet: new Vec(1, 0), fixedSize: true, "special" : true }
-      }).loadNewMap(new Vec(0, 0));
+      }).loadNewMap(C.DEBUG ? new Vec(5, 5) : new Vec(0, 0));
 
       Fathom._camera.beBoundedBy(m);
 
