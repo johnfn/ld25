@@ -66,6 +66,10 @@ package {
     public static var mapToJournal:Object = {
       ((new Vec(0, 0)).toString()) : 0
     }
+
+    public static var warps:Object = {
+      ((new Vec(0, 0)).toString()) : { "dest": new Vec(0, 1), "type": new Vec(2, 0) }
+    };
   }
 }
 

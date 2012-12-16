@@ -37,15 +37,18 @@ package {
 
       Fathom.initialize(stage);
 
-      m = new Map(25, 25, C.size).fromImage(MapClass, {
-        //(new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesheetClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
+      m = new Map(25, 25, C.size);
+
+      Fathom.mapRef = m;
+
+      m.fromImage(MapClass, {
+          (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
           (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
+        , (new Color(0, 255, 0).toString()) : { type: Warp, fixedSize: true }
       }).loadNewMap(new Vec(0, 0));
 
       Fathom._camera.beBoundedBy(m);
-
-      Fathom.mapRef = m;
 
       // The order we create these objects determines depth
 

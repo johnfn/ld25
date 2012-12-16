@@ -65,6 +65,15 @@ package {
       if (!lg.isBenign(x, y)) {
         restoreFromPoint();
       }
+
+      checkForWarps();
+    }
+
+    private function checkForWarps():void {
+      if (!touchingSet("warp").any()) return;
+
+      var warp:Warp = touchingSet("warp").one() as Warp;
+      warp.doWarp(this);
     }
 
     private function setRestorePoint():void {
