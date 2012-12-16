@@ -54,6 +54,18 @@ package {
       return dist < 50;
     }
 
+    public function canOpenChest():Boolean {
+      if (!Fathom.entities.any("TreasureChest")) return false;
+      if (hasToggledPower) return false;
+
+      var c:Entity = Fathom.entities.get("Character").one();
+      var s:Entity = Fathom.entities.get("TreasureChest").one();
+
+      var dist:Number = Math.abs(c.x - s.x) + Math.abs(c.y - s.y);
+
+      return dist < 50;
+    }
+
     private function setCameraFocus():void {
       var focus:Vec = this.rect();
 
@@ -99,6 +111,10 @@ package {
           (Fathom.entities.get("switch").one() as EnergySwitch).flip();
           EnemyStatic.noPower = true;
         }
+
+        if (canOpenChest()) {
+          checkForTreasure();
+        }
       }
 
       checkForMessage();
@@ -108,7 +124,6 @@ package {
       }
 
       checkForWarps();
-      checkForTreasure();
     }
 
     private function checkForWarps():void {
@@ -122,16 +137,20 @@ package {
 
     private function checkForTreasure():void {
       if (!Fathom.entities.any("TreasureChest")) return;
-      if (!Fathom.entities.get("TreasureChest").one().touchingRect(this)) return;
 
       var chest:TreasureChest = Fathom.entities.get("TreasureChest").one() as TreasureChest;
       var curLoc:Vec = mapRef.getTopLeftCorner().clone().divide(25);
 
       if (curLoc.equals(new Vec(5, 5)) || curLoc.equals(new Vec(7, 5))) {
-        new DialogText(C.journalog[curJournal].concat().splice(1));
-      }
+        if (needles == NO_NEEDLE) {
+          new DialogText(C.gotPoisonDarts);
+          needles = POISON_NEEDLE;
+        } else {
+          //TODO
+        }
 
-      trace(curLoc);
+        chest.open();
+      }
     }
 
     private function setRestorePoint():void {
@@ -141,6 +160,8 @@ package {
     private function restoreFromPoint():void {
       setPos(restorePt);
       Fathom.camera.snapTo(this);
+
+      listen(Hooks.flicker(this));
     }
 
     private function checkForMessage():void {

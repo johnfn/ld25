@@ -67,9 +67,10 @@ package {
         "I hear the sound of energy draining and things turning off."
       ];
 
-    public static var toggledSwitch:Array = [
+    public static var gotPoisonDarts:Array = [
         "I open the chest."
-      , "Inside, I find poison darts."
+      , "Inside, I find *poison darts*."
+      , "I can fire them with *Z*."
       , "Interesting..."
       ];
 

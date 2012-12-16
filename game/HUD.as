@@ -23,6 +23,7 @@ package {
   		}
 
       maybeMentionSwitch();
+      maybeMentionChest();
 
   		super.update(e);
   	}
@@ -30,6 +31,12 @@ package {
     public function maybeMentionSwitch():void {
       if (c.canPressSwitch()) {
         text.text = "Z to press switch";
+      }
+    }
+
+    public function maybeMentionChest():void {
+      if (c.canOpenChest()) {
+        text.text = "Z to open chest";
       }
     }
 
