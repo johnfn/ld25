@@ -19,16 +19,20 @@ package {
 
     /* ILightSource */
 
-	public function location():Vec {
-		return vec();
-	}
+  	public function location():Vec {
+  		return vec();
+  	}
 
-	public function power():int {
-		return 10;
-	}
+  	public function power():int {
+  		return 10;
+  	}
 
-	public function angle():int {
-		return _angle;
-	}
+  	public function angle():int {
+  		return _angle;
+  	}
+
+    public function isBenign():Boolean {
+      return false;
+    }
   }
 }

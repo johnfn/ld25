@@ -51,7 +51,7 @@ package {
 
       lg = new LightGrid(m);
 
-      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m);
+      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m, lg);
 
       journal = new Journal();
 

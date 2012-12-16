@@ -8,9 +8,14 @@ package {
   public class Character extends MovingEntity implements ILightSource {
     private var mapRef:Map;
     private var dir:Vec = new Vec(0, 0);
+
+    private var restorePt:Vec = new Vec(2, 2);
+    private var restoreMap:Vec = new Vec(0, 0);
+    private var lg:LightGrid;
+
     public var journal:Journal;
 
-    function Character(x:int, y:int, mapRef:Map) {
+    function Character(x:int, y:int, mapRef:Map, lg:LightGrid) {
       super(x, y, C.size, C.size);
       loadSpritesheet(C.MapClass, C.dim, new Vec(0, 0));
 
@@ -25,6 +30,7 @@ package {
       this.width -= 2;
       this.height -= 2;
       this.mapRef = mapRef;
+      this.lg = lg;
     }
 
     private function setCameraFocus():void {
@@ -56,14 +62,26 @@ package {
       }
 
       checkForMessage();
+
+      if (!lg.isBenign(x, y)) {
+        trace("uh oh!");
+      }
+    }
+
+    private function setRestorePoint():void {
+      restorePt = vec();
+      restoreMap = mapRef.getTopLeftCorner();
+    }
+
+    private function restoreFromPoint():void {
+      mapRef.loadNewMapAbs(restoreMap);
+      setPos(restorePt);
     }
 
     private function checkForMessage():void {
       if (!C.mapToJournal.hasOwnProperty(mapRef.getTopLeftCorner().toString())) return;
 
       var curJournal:int = C.mapToJournal[mapRef.getTopLeftCorner().toString()];
-
-      trace(curJournal);
 
       if (journal.haveSeen(curJournal)) {
         return;
@@ -72,6 +90,9 @@ package {
       journal.addJournalEntry(curJournal);
 
       new DialogText(C.journalog[curJournal].concat().splice(1));
+
+      // Restore points = whenever dialog is initiated.
+      setRestorePoint();
     }
 
     private function leftMap():void {
@@ -99,6 +120,10 @@ package {
 
     public function angle():int {
       return 0;
+    }
+
+    public function isBenign():Boolean {
+      return true;
     }
   }
 }

@@ -23,9 +23,6 @@ package {
     override public function update(e:EntitySet):void {
     	super.update(e);
 
-    	trace(xColl);
-    	trace(yColl);
-
     	vel.x = 0;
     	vel.y = 0;
 
@@ -62,5 +59,10 @@ package {
 	public function angle():int {
 		return _angle;
 	}
+
+    public function isBenign():Boolean {
+      return false;
+    }
+
   }
 }

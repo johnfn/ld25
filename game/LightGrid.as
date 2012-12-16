@@ -5,6 +5,7 @@ package {
     private var SIZE:int = C.size;
     private var mapRef:Map;
     private var intensity:Array = [];
+    private var benign:Array = [];
 
     public static var BEHAVIOR_STATIC:int = 0;
     public static var BEHAVIOR_ROTATE:int = 1;
@@ -21,7 +22,7 @@ package {
 
       this.mapRef = mapRef;
 
-      var myBlur:BlurFilter = new BlurFilter(90, 90);
+      var myBlur:BlurFilter = new BlurFilter(5, 5);
       filters = [myBlur];
 
       loadNewMap();
@@ -32,11 +33,19 @@ package {
 
       for (var i:int = 0; i < mapRef.widthInTiles; i++) {
         intensity[i] = [];
+        benign[i] = [];
 
         for (var j:int = 0; j < mapRef.heightInTiles; j++) {
           intensity[i][j] = LIGHT_POWER;
+          benign[i][j]    = true;
         }
       }
+    }
+
+    public function isBenign(x:int, y:int):Boolean {
+      var xRel:int = Math.floor(x / C.dim.x);
+      var yRel:int = Math.floor(y / C.dim.y);
+      return benign[xRel][yRel];
     }
 
     public override function update(e:EntitySet):void {
@@ -49,6 +58,7 @@ package {
       for (i = 0; i < mapRef.widthInTiles; i++) {
         for (j = 0; j < mapRef.heightInTiles; j++) {
           intensity[i][j] = START_DARK;
+          benign[i][j]    = true;
         }
       }
 
@@ -70,16 +80,19 @@ package {
           var curX:Number = caster.location().x;
           var curY:Number = caster.location().y;
 
+          var dx:Number = Math.cos(radAngle) * LIGHT_PRECISION;
+          var dy:Number = Math.sin(radAngle) * LIGHT_PRECISION;
+
           // So rad!
           var radAngle:Number = angle * Math.PI / 180;
 
-          curX += Math.cos(radAngle) * LIGHT_PRECISION;
-          curY += Math.sin(radAngle) * LIGHT_PRECISION;
+          curX += dx;
+          curY += dy;
 
           // Step
           for (j = 0; j < caster.power(); j++) {
-            curX += Math.cos(radAngle) * LIGHT_PRECISION;
-            curY += Math.sin(radAngle) * LIGHT_PRECISION;
+            curX += dx;
+            curY += dy;
 
             var tileX:int = Math.floor(curX / C.dim.x);
             var tileY:int = Math.floor(curY / C.dim.y);
@@ -89,6 +102,8 @@ package {
             }
 
             intensity[tileX][tileY] -= LIGHT_POWER;
+
+            benign[tileX][tileY] = benign[tileX][tileY] && caster.isBenign();
 
             if (Fathom.anythingAt(tileX, tileY)) {
               break;

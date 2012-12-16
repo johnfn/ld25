@@ -3,5 +3,6 @@ package {
 		function location():Vec;
 		function power():int;
 		function angle():int;
+		function isBenign():Boolean;
     }
 }
