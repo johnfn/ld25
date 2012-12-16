@@ -14,7 +14,7 @@ package {
     private static var SPREAD_ANGLE:int    = 45;
     private static var RAY_COUNT:int       = 9;
     private static var LIGHT_PRECISION:int = C.size; //smaller == more precise
-    private static var START_DARK:Number   = 0.8;
+    private static var START_DARK:Number   = 0.4;
     private static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
@@ -52,6 +52,8 @@ package {
       // Reset lights from last time
       var i:int;
       var j:int;
+
+      raiseToTop();
 
       var casters:EntitySet = Fathom.entities.get("lightsource");
 
@@ -105,7 +107,7 @@ package {
 
             benign[tileX][tileY] = benign[tileX][tileY] && caster.isBenign();
 
-            if (Fathom.anythingAt(tileX, tileY)) {
+            if (! Fathom.mapRef.transparency[tileX][tileY]) {
               break;
             }
           }

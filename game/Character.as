@@ -11,6 +11,8 @@ package {
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
+    private var _angle:int = 0;
+    private var angleVec:Vec = new Vec(1, 0);
 
     public var journal:Journal;
 
@@ -45,6 +47,14 @@ package {
       focus.y += dir.y * 100;
 
       Fathom.camera.follow(focus);
+
+      /* update angle too */
+
+      if (signX != 0 || signY != 0) {
+        angleVec = new Vec(signX, signY);
+      }
+
+      _angle = Math.atan2(angleVec.y, angleVec.x) * 180.0 / Math.PI;
     }
 
     override public function update(e:EntitySet):void {
@@ -127,7 +137,7 @@ package {
     }
 
     public function angle():int {
-      return 0;
+      return _angle;
     }
 
     public function isBenign():Boolean {

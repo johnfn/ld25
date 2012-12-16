@@ -42,8 +42,11 @@ package {
       Fathom.mapRef = m;
 
       m.fromImage(MapClass, {
-          (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true },
-          (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
+          (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true, roundOutEdges: true }
+        , (new Color(0, 0, 100).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, "transparent": true }
+        , (new Color(0, 200, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, fancyEdges: true }
+        , (new Color(0, 150, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
+        , (new Color(0, 0, 0).toString()) : { type: Block, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
         , (new Color(0, 255, 0).toString()) : { type: Warp, fixedSize: true }
       }).loadNewMap(new Vec(0, 0));
@@ -54,7 +57,7 @@ package {
 
       lg = new LightGrid(m);
 
-      main.c = new Character(2 * C.dim.x + 2, 2 * C.dim.y, m, lg);
+      main.c = new Character(5 * C.dim.x + 2, 5 * C.dim.y, m, lg);
 
       journal = new Journal();
 
