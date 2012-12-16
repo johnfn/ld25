@@ -74,7 +74,9 @@ package {
     override public function update(e:EntitySet):void {
       super.update(e);
 
-      vel.setPos(Util.movementVector().multiply(7));
+      var speed:int = Util.KeyDown.X ? 14 : 7;
+
+      vel.setPos(Util.movementVector().multiply(speed));
 
       setCameraFocus();
 
