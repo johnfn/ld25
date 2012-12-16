@@ -59,7 +59,6 @@ package {
     }
 
     private function checkForMessage():void {
-      trace(mapRef.getTopLeftCorner().toString());
       if (!C.mapToJournal.hasOwnProperty(mapRef.getTopLeftCorner().toString())) return;
 
       var curJournal:int = C.mapToJournal[mapRef.getTopLeftCorner().toString()];

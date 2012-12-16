@@ -39,6 +39,11 @@ package {
       , "'Infiltrate the Manor. Kill Daniel. Don't be seen.'"
       , "There is no signature."
       ]
+    , [ "A few memories come back to me, as if illuminated by a bright light."
+      , "Laughter."
+      , "Lyanne."
+      , "They fade as soon as I think about them."
+      ]
     , [ "Black Guards"
       , "Unfortunately, the Manor where Daniel resides is guarded."
       , "Black guards are dumb. If I can stay out of the range of their flashlight,"

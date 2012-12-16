@@ -55,6 +55,8 @@ package {
 
       journal = new Journal();
 
+      new HUD();
+
       main.c.journal = journal;
 
       Fathom.start();
