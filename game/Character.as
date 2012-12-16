@@ -54,6 +54,25 @@ package {
       if (Util.KeyJustDown.J) {
         journal.show();
       }
+
+      checkForMessage();
+    }
+
+    private function checkForMessage():void {
+      trace(mapRef.getTopLeftCorner().toString());
+      if (!C.mapToJournal.hasOwnProperty(mapRef.getTopLeftCorner().toString())) return;
+
+      var curJournal:int = C.mapToJournal[mapRef.getTopLeftCorner().toString()];
+
+      trace(curJournal);
+
+      if (journal.haveSeen(curJournal)) {
+        return;
+      }
+
+      journal.addJournalEntry(curJournal);
+
+      new DialogText(C.journalog[curJournal].concat().splice(1));
     }
 
     private function leftMap():void {

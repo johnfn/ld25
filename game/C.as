@@ -26,22 +26,41 @@ package {
     // Game modes.
     public static var MODE_NORMAL:int    = 0; // Should be the only unpaused mode.
     public static var MODE_JOURNAL:int   = 1;
+    public static var MODE_TEXT:int      = 2;
 
     public static var JOURNAL_TITLE:int = 0;
 
     public static var journalog:Array = [
-        [ "JOURNAL ENTRY #1"
-        , "I've come to. It's dark. Wind rustles through the trees. I don't know where I am."
-        , "..."
-        , "I don't know *who* I am."
-        , "My only clue is a note I found in my pocket. It says the following:"
-        , "'Infiltrate the Manor. Kill Daniel. Don't be seen.'"
-        , "There is no signature."
-        ]
-      , [ "ENTRY #2", "herpderp"]
-      , [ "ENTRY #3", "herplerp"]
+      [ "JOURNAL ENTRY #1"
+      , "I've come to. It's dark. Wind rustles through the trees. I don't know where I am."
+      , "..."
+      , "I don't know *who* I am."
+      , "My only clue is a note I found in my pocket. It says the following:"
+      , "'Infiltrate the Manor. Kill Daniel. Don't be seen.'"
+      , "There is no signature."
+      ]
+    , [ "Black Guards"
+      , "Unfortunately, the Manor where Daniel resides is guarded."
+      , "Black guards are dumb. If I can stay out of the range of their flashlight,"
+      , "I should be able to escape unseen."
+      ]
+    , [ "Red Guards"
+      , "Red guards are pretty dumb too. They seem to just constantly spin in a circle."
+      , "Don't they ever get dizzy?"
+      ]
+    , [ "Blue Guards"
+      , "Blue guards are smarter."
+      , "They keep walking until they run into something."
+      , "Then they turn around and do the same thing."
+      , "But there is a silver lining."
+      , "Blue guards seem to be totally unaware of their surroundings."
+      , "If I were to move things around, I bet they wouldn't even notice."
+      ]
+    ];
 
-    ]
+    public static var mapToJournal:Object = {
+      ((new Vec(0, 0)).toString()) : 0
+    }
   }
 }
 

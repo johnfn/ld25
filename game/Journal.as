@@ -7,7 +7,6 @@ package {
 
   	private var journalsSeen:Array = [];
   	private var journalMode:int = JOURNAL_LIST;
-  	private var numJournals:int;
   	private var selectedJournal:int = 0;
   	private var currentlySelectedJournal:Boolean = false;
 
@@ -15,11 +14,6 @@ package {
 
     function Journal() {
     	super(0, 0);
-
-    	addJournalEntry(0);
-    	addJournalEntry(1);
-    	addJournalEntry(2);
-    	numJournals = C.journalog.length;
 
     	contents = new Text("", C.fontName);
     	contents.setPos(new Vec(0, 0));
@@ -30,6 +24,10 @@ package {
 
     public function addJournalEntry(entry:int):void {
     	journalsSeen.push(entry);
+    }
+
+    public function haveSeen(entry:int):Boolean {
+    	return journalsSeen.indexOf(entry) != -1;
     }
 
     public function show():void {
