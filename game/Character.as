@@ -105,6 +105,7 @@ package {
     }
 
     private function checkForWarps():void {
+      if (!Fathom.entities.any("warp")) return;
       if (!Fathom.entities.get("warp").one().touchingRect(this)) return;
 
       var warp:Warp = Fathom.entities.get("warp").one() as Warp;

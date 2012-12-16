@@ -73,7 +73,8 @@ package {
     }
 
     public static var warps:Object = {
-      ((new Vec(0, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
+      //((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
+      ((new Vec(1, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
     };
   }
 }

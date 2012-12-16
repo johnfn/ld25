@@ -10,9 +10,7 @@ package {
       loadSpritesheet(C.SpritesClass, C.dim);
 
       // Properly load this image from the data in C.
-      var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().toString()];
-
-      Util.p(dest);
+      var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().divide(25).toString()];
 
       // It's possible there is no entry, in which case it was a one way exit warp.
       if (dest) {
