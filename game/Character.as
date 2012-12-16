@@ -105,10 +105,11 @@ package {
     }
 
     private function checkForWarps():void {
-      if (!touchingSet("warp").any()) return;
+      if (!Fathom.entities.get("warp").one().touchingRect(this)) return;
 
-      var warp:Warp = touchingSet("warp").one() as Warp;
+      var warp:Warp = Fathom.entities.get("warp").one() as Warp;
       warp.doWarp(this);
+      raiseToTop();
     }
 
     private function setRestorePoint():void {

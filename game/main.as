@@ -43,6 +43,7 @@ package {
 
       var groundsList:Array = [ new Color(255, 100, 0).toString()
                               , new Color(255, 200, 0).toString()
+                              , new Color(0, 255, 0).toString()
                               ];
 
       m.fromImage(MapClass, groundsList, {
@@ -62,7 +63,8 @@ package {
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
         , (new Color(0, 0, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
-        , (new Color(0, 255, 0).toString()) : { type: Warp, fixedSize: true }
+        /* Stairs up (warp) */
+        , (new Color(0, 255, 0).toString()) : { type: Warp, gfx: C.SpritesClass, spritesheet: new Vec(1, 0), fixedSize: true, "special" : true }
       }).loadNewMap(new Vec(0, 0));
 
       Fathom._camera.beBoundedBy(m);

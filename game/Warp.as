@@ -4,13 +4,15 @@ package {
     private var mapDest:Vec;
     private var isSourceWarp:Boolean = false;
 
-    function Warp(x:int=0, y:int=0, type:int=0) {
-      super(x, y, SIZE, SIZE);
+    function Warp() {
+      super(0, 0, SIZE, SIZE);
 
       loadSpritesheet(C.SpritesClass, C.dim);
 
       // Properly load this image from the data in C.
       var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().toString()];
+
+      Util.p(dest);
 
       // It's possible there is no entry, in which case it was a one way exit warp.
       if (dest) {
@@ -18,7 +20,7 @@ package {
         mapDest = dest.dest;
 
         isSourceWarp = true;
-	  }
+  	  }
     }
 
     public function isSource():Boolean {
