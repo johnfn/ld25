@@ -42,7 +42,7 @@ package {
       Fathom.mapRef = m;
 
       var groundsList:Array = [ new Color(255, 100, 0).toString()
-                              , new Color(255, 255, 255).toString()
+                              , new Color(255, 200, 0).toString()
                               ];
 
       m.fromImage(MapClass, groundsList, {
@@ -53,6 +53,12 @@ package {
         , (new Color(0, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, fancyEdges: true }
         /* trimming along sewer walls */
         , (new Color(255, 100, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, fancyEdges: true, "transparent": true }
+        /* dirt ground */
+        , (new Color(255, 200, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(10, 2), fixedSize: true, randoEdges: true, "transparent": true }
+        /* Security cam (sewer) */
+        , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
+        /* power switch (sewer) */
+        , (new Color(150, 0, 0).toString()) : { type: EnergySwitch, gfx: C.SpritesClass, spritesheet: new Vec(0, 2), fixedSize: true }
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
         , (new Color(0, 0, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true }
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
@@ -69,7 +75,7 @@ package {
 
       journal = new Journal();
 
-      new HUD();
+      new HUD(main.c);
 
       main.c.journal = journal;
 

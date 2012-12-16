@@ -14,6 +14,8 @@ package {
     private var _angle:int = 0;
     private var angleVec:Vec = new Vec(1, 0);
 
+    private var hasToggledPower:Boolean = false;
+
     public var journal:Journal;
 
     function Character(x:int, y:int, mapRef:Map, lg:LightGrid) {
@@ -32,6 +34,18 @@ package {
       this.height -= 2;
       this.mapRef = mapRef;
       this.lg = lg;
+    }
+
+    public function canPressSwitch():Boolean {
+      if (!Fathom.entities.any("switch")) return false;
+      if (hasToggledPower) return false;
+
+      var c:Entity = Fathom.entities.get("Character").one();
+      var s:Entity = Fathom.entities.get("switch").one();
+
+      var dist:Number = Math.abs(c.x - s.x) + Math.abs(c.y - s.y);
+
+      return dist < 50;
     }
 
     private function setCameraFocus():void {
@@ -68,6 +82,15 @@ package {
 
       if (Util.KeyJustDown.J) {
         journal.show();
+      }
+
+      if (Util.KeyJustDown.Z) {
+        if (canPressSwitch()) {
+          hasToggledPower = true;
+          new DialogText(C.toggledSwitch);
+          (Fathom.entities.get("switch").one() as EnergySwitch).flip();
+          EnemyStatic.noPower = true;
+        }
       }
 
       checkForMessage();
