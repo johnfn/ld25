@@ -65,7 +65,13 @@ package {
 
     public static var toggledSwitch:Array = [
         "I hear the sound of energy draining and things turning off."
-      ]
+      ];
+
+    public static var toggledSwitch:Array = [
+        "I open the chest."
+      , "Inside, I find poison darts."
+      , "Interesting..."
+      ];
 
     public static var mapToJournal:Object = {
       ((new Vec(0, 0)).toString()) : 0

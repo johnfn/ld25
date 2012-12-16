@@ -9,6 +9,12 @@ package {
     private var mapRef:Map;
     private var dir:Vec = new Vec(0, 0);
 
+    private static var NO_NEEDLE:int = 0;
+    private static var POISON_NEEDLE:int = 1;
+    private static var TRANQ_NEEDLE:int = 2;
+
+    private var needles:int = NO_NEEDLE;
+
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
     private var _angle:int = 0;
@@ -120,6 +126,10 @@ package {
 
       var chest:TreasureChest = Fathom.entities.get("TreasureChest").one() as TreasureChest;
       var curLoc:Vec = mapRef.getTopLeftCorner().clone().divide(25);
+
+      if (curLoc.equals(new Vec(5, 5)) || curLoc.equals(new Vec(7, 5))) {
+        new DialogText(C.journalog[curJournal].concat().splice(1));
+      }
 
       trace(curLoc);
     }
