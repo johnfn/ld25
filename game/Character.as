@@ -104,7 +104,11 @@ package {
 
       var speed:int = Util.KeyDown.X ? 14 : 7;
 
-      vel.setPos(Util.movementVector().multiply(speed));
+      if (!isFlickering) {
+        vel.setPos(Util.movementVector().multiply(speed));
+      } else {
+        vel.setPos(new Vec(0, 0));
+      }
 
       setCameraFocus();
 
