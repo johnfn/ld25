@@ -45,6 +45,10 @@ package {
                               , new Color(255, 200, 0).toString()
                               , new Color(0, 255, 0).toString()
                               , new Color(0, 255, 255).toString()
+                              , new Color(255, 25, 0).toString()
+                              , new Color(255, 30, 0).toString()
+                              , new Color(255, 50, 0).toString()
+                              , new Color(255, 75, 0).toString()
                               ];
 
       m.fromImage(MapClass, groundsList, {
@@ -78,6 +82,8 @@ package {
         , (new Color(255, 30, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(1, 0) }
         /* Guard rotating */
         , (new Color(255, 50, 0).toString()) : { type: EnemyRotating, gfx: C.SpritesClass, spritesheet: new Vec(0, 3), fixedSize: true, args: new Vec(0, 1) }
+        /* Guard patrolling */
+        , (new Color(255, 75, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 3), fixedSize: true, args: new Vec(0, 1) }
         /* power switch (sewer) */
         , (new Color(150, 0, 0).toString()) : { type: EnergySwitch, gfx: C.SpritesClass, spritesheet: new Vec(0, 2), fixedSize: true }
         , (new Color(0, 150, 0).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(5, 2), fixedSize: true, roundOutEdges: true }
