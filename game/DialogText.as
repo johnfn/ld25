@@ -45,6 +45,23 @@ package {
     private function nextDialog():void {
       var nextText:String = dialogsLeft.shift();
 
+      if (nextText == "FADEHALFWAY") {
+        LightGrid.singleton.dimTo(0.9, 0.1);
+        LightGrid.singleton.update(Fathom.entities);
+        nextText = dialogsLeft.shift();
+      }
+
+      if (nextText == "FADEALLTHEWAY") {
+        LightGrid.singleton.dimTo(1.0, 0.0);
+        LightGrid.singleton.update(Fathom.entities);
+        nextText = dialogsLeft.shift();
+      }
+
+      if (nextText == "FADENORMAL") {
+        LightGrid.singleton.dimTo(LightGrid.NORMAL_START_DARK, LightGrid.NORMAL_LIGHT_POWER);
+        nextText = dialogsLeft.shift();
+      }
+
       text.text = nextText;
     }
 

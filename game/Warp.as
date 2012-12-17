@@ -12,9 +12,12 @@ package {
       // Properly load this image from the data in C.
       var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().divide(25).toString()];
 
+      if (dest.type) {
+        setTile(dest.type.x, dest.type.y);
+      }
+
       // It's possible there is no entry, in which case it was a one way exit warp.
       if (dest.dest) {
-        setTile(dest.type.x, dest.type.y);
         mapDest = dest.dest;
 
         isSourceWarp = true;

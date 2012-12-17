@@ -12,6 +12,8 @@ package {
     private static var pixel_width:int;
     private static var pixel_height:int;
 
+    public static var NORMAL_START_DARK:Number  = 0.6;
+    public static var NORMAL_LIGHT_POWER:Number = 0.6;
 
     public static var BEHAVIOR_STATIC:int = 0;
     public static var BEHAVIOR_ROTATE:int = 1;
@@ -20,8 +22,10 @@ package {
     public static var SPREAD_ANGLE:int    = 45;
     public static var RAY_COUNT:int       = 9;
     public static var LIGHT_PRECISION:int = RESOLUTION; //smaller == more precise
-    public static var START_DARK:Number   = 0.6;
-    public static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
+    public static var START_DARK:Number   = NORMAL_START_DARK;
+    public static var LIGHT_POWER:Number  = NORMAL_LIGHT_POWER; // could be a property of casters.
+
+    public static var singleton:LightGrid = null;
 
     function LightGrid(mapRef:Map) {
       super(0, 0, mapRef.width, mapRef.height);
@@ -35,6 +39,34 @@ package {
       filters = [myBlur];
 
       loadNewMap();
+
+      LightGrid.singleton = this;
+    }
+
+    // TODO This is one of those things that should be
+    // way simpler.
+    // but you'd kinda need references or something.. >:?
+    public function dimTo(sd:Number, lp:Number):void {
+      var ticks:Number = 30;
+      var sd_delta:Number = (sd - START_DARK) / ticks;
+      var lp_delta:Number = (lp - LIGHT_POWER) / ticks;
+
+      trace(sd_delta);
+
+      var dimmer:Function = function() {
+        --ticks;
+        if (ticks < 0) {
+          unlisten(dimmer);
+        }
+
+        LightGrid.START_DARK += sd_delta;
+        LightGrid.LIGHT_POWER += sd_delta;
+
+        // Force visual update...
+        LightGrid.singleton.update(Fathom.entities);
+      }
+
+      listen(dimmer);
     }
 
     private function loadNewMap():void {
@@ -125,9 +157,16 @@ package {
 
       // Draw grid
 
-      for (i = 0; i < pixel_width; i++) {
-        for (j = 0; j < pixel_height; j++) {
-          graphics.beginFill(0x000000, intensity[i][j]);
+      for (i = -10; i < pixel_width + 10; i++) {
+        for (j = -10; j < pixel_height + 10; j++) {
+          var alpha:Number;
+          if (i < 0 || i >= pixel_width ||
+              j < 0 || j >= pixel_height) {
+            alpha = START_DARK;
+          } else {
+            alpha = intensity[i][j];
+          }
+          graphics.beginFill(0x000000, alpha);
           graphics.drawRect(i * RESOLUTION, j * RESOLUTION, RESOLUTION, RESOLUTION);
         }
       }
