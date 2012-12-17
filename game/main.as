@@ -94,7 +94,7 @@ package {
         , (new Color(255, 0, 0).toString()) : { type: EnemyPatrolling, gfx: C.SpritesClass, spritesheet: new Vec(2, 1), fixedSize: true }
         /* Stairs up (warp) */
         , (new Color(0, 255, 0).toString()) : { type: Warp, gfx: C.SpritesClass, spritesheet: new Vec(1, 0), fixedSize: true, "special" : true }
-      }).loadNewMap(C.DEBUG ? new Vec(5, 5) : new Vec(0, 0));
+      }).loadNewMap(C.DEBUG ? new Vec(6, 4) : new Vec(0, 0));
 
       Fathom._camera.beBoundedBy(m);
 
@@ -102,7 +102,7 @@ package {
 
       lg = new LightGrid(m);
 
-      main.c = new Character(5 * C.dim.x + 2, 5 * C.dim.y, m, lg);
+      main.c = new Character(10 * C.dim.x + 2, 10 * C.dim.y, m, lg);
 
       journal = new Journal();
 

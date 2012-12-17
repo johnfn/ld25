@@ -74,12 +74,33 @@ package {
       , "Interesting..."
       ];
 
+    public static var gotTranqDarts:Array = [
+        "I open the chest."
+      , "Inside, I find *tranquilizer darts*."
+      , "I can fire them with *Z*."
+      , "Interesting..."
+      ];
+
+    public static var alreadyHasPoison:Array = [
+        "I open the chest."
+      , "Inside, I find *tranquilizer darts*."
+      , "I'll swap my poison darts for these."
+      ];
+
+    public static var alreadyHasTranq:Array = [
+        "I open the chest."
+      , "Inside, I find *poison darts*."
+      , "But since I already have tranquilizers, I think I'll stick with them for now."
+      ];
+
     public static var mapToJournal:Object = {
       ((new Vec(0, 0)).toString()) : 0
     }
 
     public static var warps:Object = {
-      ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
+        ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
+      , ((new Vec(6, 4)).toString()) : { "dest": new Vec(5, 1), "type": new Vec(1, 0) }
+      , ((new Vec(3, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(1, 0) }
     };
   }
 }

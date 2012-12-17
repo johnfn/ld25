@@ -161,10 +161,23 @@ package {
           new DialogText(C.gotPoisonDarts);
           needles = POISON_NEEDLE;
         } else {
-          //TODO
+          new DialogText(C.alreadyHasTranq);
         }
 
         chest.open();
+      }
+
+      if (curLoc.equals(new Vec(3, 0))) {
+        if (needles == NO_NEEDLE) {
+          new DialogText(C.gotTranqDarts);
+          needles = TRANQ_NEEDLE;
+        } else {
+          new DialogText(C.alreadyHasPoison);
+          needles = TRANQ_NEEDLE;
+        }
+
+        chest.open();
+
       }
     }
 

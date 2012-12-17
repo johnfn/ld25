@@ -32,7 +32,6 @@ package {
       }
 
       isOutOfAction = true;
-      raiseToTop();
     }
 
     /* ILightSource */
