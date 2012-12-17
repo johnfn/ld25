@@ -64,6 +64,9 @@ package {
           /* manor treasurechest */
         , (new Color(100, 110, 120).toString()) : { type: TreasureChest, gfx: C.SpritesClass, spritesheet: new Vec(1, 2), fixedSize: true }
 
+          /* manor glass */
+        , (new Color(0, 200, 255).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(0, 5), fixedSize: true, transparent: true }
+
           /* water */
         , (new Color(0, 0, 100).toString()) : { gfx: C.SpritesClass, spritesheet: new Vec(4, 7), fixedSize: true, roundOutEdges: true, transparent: true }
           /* sewer walls */

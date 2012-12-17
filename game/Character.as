@@ -14,7 +14,7 @@ package {
     public static var POISON_NEEDLE:int = 1;
     public static var TRANQ_NEEDLE:int = 2;
 
-    public static var needles:int = C.DEBUG ? POISON_NEEDLE : NO_NEEDLE;
+    public static var needles:int = NO_NEEDLE;
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;

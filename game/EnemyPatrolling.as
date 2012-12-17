@@ -27,7 +27,7 @@ package {
     	vel.x = 0;
     	vel.y = 0;
 
-        trace(xColl, yColl);
+        if (isOutOfAction) return;
 
     	if (state == PATROLLING) {
     		if (touchingLeft || touchingRight || touchingTop || touchingBottom) {
