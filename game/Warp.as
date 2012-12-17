@@ -12,6 +12,8 @@ package {
       // Properly load this image from the data in C.
       var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().divide(25).toString()];
 
+      if (!dest) return;
+
       if (dest.type) {
         setTile(dest.type.x, dest.type.y);
       }

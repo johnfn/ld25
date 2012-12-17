@@ -284,6 +284,8 @@ package {
 
       journal.addJournalEntry(curJournal);
 
+      // Force light to update.
+      LightGrid.singleton.update(Fathom.entities);
       new DialogText(C.journalog[curJournal].concat().splice(1));
 
       // Restore points = whenever dialog is initiated.

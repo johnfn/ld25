@@ -78,7 +78,7 @@ package {
         /* Security cam (sewer) */
         , (new Color(200, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(0, 1) }
         /* Security cam left (sewer) */
-        , (new Color(199, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(0, 0), fixedSize: true, args: new Vec(1, 0) }
+        , (new Color(199, 0, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 1), fixedSize: true, args: new Vec(1, 0) }
         /* Guard */
         , (new Color(255, 25, 0).toString()) : { type: EnemyStatic, gfx: C.SpritesClass, spritesheet: new Vec(1, 3), fixedSize: true, args: new Vec(0, 1) }
         /* Guard left */

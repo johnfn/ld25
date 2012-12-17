@@ -83,6 +83,11 @@ package {
       , "Unless..."
       , "I should look around."
       ]
+    , [ "THE MANOR"
+      , "Finally out of the sewers."
+      , "This definitely looks like a Manor, so I'm going in the right direction."
+      , "Now I just have to find a Daniel."
+      ]
     ];
 
     public static var mapToJournal:Object = {
@@ -95,6 +100,7 @@ package {
       , ((new Vec(5, 3)).toString()) : 6
       , ((new Vec(6, 3)).toString()) : 7
       , ((new Vec(4, 3)).toString()) : 8
+      , ((new Vec(5, 5)).toString()) : 9
     };
 
     public static var toggledSwitch:Array = [
@@ -134,7 +140,8 @@ package {
         ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(1, 0) }
       , ((new Vec(6, 4)).toString()) : { "dest": new Vec(5, 1), "type": new Vec(2, 0) }
       , ((new Vec(3, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(1, 0) }
-      , ((new Vec(5, 5)).toString()) : { "type": new Vec(2, 0) }
+      , ((new Vec(5, 5)).toString()) : {                        "type": new Vec(8, 8) }
+      , ((new Vec(5, 1)).toString()) : {                        "type": new Vec(10, 2) }
     };
   }
 }
