@@ -15,7 +15,7 @@ package {
     public static var POISON_NEEDLE:int = 1;
     public static var TRANQ_NEEDLE:int = 2;
 
-    public static var needles:int = C.DEBUG ? TRANQ_NEEDLE : NO_NEEDLE;
+    public static var needles:int = C.DEBUG ? POISON_NEEDLE : NO_NEEDLE;
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
@@ -42,6 +42,8 @@ package {
       this.height -= 2;
       this.mapRef = mapRef;
       this.lg = lg;
+
+      this.restorePt = new Vec(x, y);
     }
 
     public function canPressSwitch():Boolean {
@@ -59,7 +61,6 @@ package {
 
     public function canOpenChest():Boolean {
       if (!Fathom.entities.any("TreasureChest")) return false;
-      if (hasToggledPower) return false;
 
       var c:Entity = Fathom.entities.get("Character").one();
       var s:Entity = Fathom.entities.get("TreasureChest").one();
@@ -141,7 +142,79 @@ package {
       checkForWarps();
 
       if (Fathom.mapRef.getTopLeftCorner().clone().divide(25).equals(new Vec(4, 2))) {
+        if (murdered) {
+          new DialogText(
+              [ "..."
+              , "Oh crap."
+              , "*The guards look you over."
+              , "GUARDS: Greetings, test subject #1334."
+              , "Who are you people? What do you want from me?"
+              , "GUARDS: Nothing more than to explain why you are here."
+              , "..."
+              , "GUARDS: We gave you one instruction."
+              , "GUARDS: 'Kill Daniel.'"
+              , "GUARDS: You had no idea who Daniel is."
+              , "GUARDS: You had no idea why he should die."
+              , "GUARDS: Nevertheless you resolved to kill him."
+              , "GUARDS: Not only that."
+              , "GUARDS: But you killed " + numMurders + " of us in the process."
+              , "GUARDS: Just because we stood in your way."
+              , "FADEHALFWAY"
+              , "GUARDS: Daniel isn't the villain here."
+              , "FADEALLTHEWAY"
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              // lol don't ask
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              , "GUARDS: You are."
+              ]
+            );
+        } else {
+          new DialogText(
+              [ "..."
+              , "Oh hey."
+              , "*The guards look you over."
+              , "GUARDS: Greetings, test subject #1334."
+              , "Who are you people? What do you want from me?"
+              , "GUARDS: Nothing more than to explain why you are here."
+              , "..."
+              , "GUARDS: We gave you one instruction."
+              , "GUARDS: 'Kill Daniel.'"
+              , "GUARDS: You had no idea who Daniel is."
+              , "GUARDS: You had no idea why he should die."
+              , "GUARDS: Nevertheless you resolved to kill him."
+              , "No I didn't."
+              , "GUARDS: And you put like 5 of us to sleep!"
+              , "That's not even the right number."
+              , "GUARDS: Well, it's definitely more than one!"
+              , "GUARDS: Counting is hard. Give us a break."
+              , "Cut me some slack here. How do you even know I was going to kill the guy?"
+              , "GUARDS: ..."
+              , "Heck I just wanted to meet up with the guy. Figure out why someone had it out for him."
+              , "Maybe open up a can of natty light."
+              , "GUARDS: .............."
+              , "GUARDS: Wat."
+              , "FADEHALFWAY"
+              , "Yeah. OK. I'm outta here. You guys are freaks."
+              , "FADEALLTHEWAY"
+              , "You win!"
+              , "You win!"
+              , "You win!"
+              , "You win!"
+              , "You win!"
+              ]
+            );
 
+        }
       }
     }
 
@@ -161,11 +234,11 @@ package {
       var chest:TreasureChest = Fathom.entities.get("TreasureChest").one() as TreasureChest;
       var curLoc:Vec = mapRef.getTopLeftCorner().clone().divide(25);
 
-      if (curLoc.equals(new Vec(5, 5)) || curLoc.equals(new Vec(7, 5))) {
+      if (curLoc.equals(new Vec(8, 6))) {
         if (needles == NO_NEEDLE) {
           new DialogText(C.gotPoisonDarts);
           needles = POISON_NEEDLE;
-        } else {
+        } else if (needles == TRANQ_NEEDLE) {
           new DialogText(C.alreadyHasTranq);
         }
 
@@ -176,7 +249,7 @@ package {
         if (needles == NO_NEEDLE) {
           new DialogText(C.gotTranqDarts);
           needles = TRANQ_NEEDLE;
-        } else {
+        } else if (needles == POISON_NEEDLE) {
           new DialogText(C.alreadyHasPoison);
           needles = TRANQ_NEEDLE;
         }

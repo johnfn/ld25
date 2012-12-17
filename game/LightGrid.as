@@ -17,11 +17,11 @@ package {
     public static var BEHAVIOR_ROTATE:int = 1;
     public static var BEHAVIOR_PATROL:int = 2;
 
-    private static var SPREAD_ANGLE:int    = 45;
-    private static var RAY_COUNT:int       = 9;
-    private static var LIGHT_PRECISION:int = RESOLUTION; //smaller == more precise
-    private static var START_DARK:Number   = 0.6;
-    private static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
+    public static var SPREAD_ANGLE:int    = 45;
+    public static var RAY_COUNT:int       = 9;
+    public static var LIGHT_PRECISION:int = RESOLUTION; //smaller == more precise
+    public static var START_DARK:Number   = 0.6;
+    public static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
       super(0, 0, mapRef.width, mapRef.height);
@@ -112,13 +112,13 @@ package {
               break;
             }
 
-            intensity[tileX][tileY] -= LIGHT_POWER;
-
-            benign[tileX][tileY] = benign[tileX][tileY] && caster.isBenign();
-
             if (! Fathom.mapRef.transparency[Math.floor(curX / 25)][Math.floor(curY / 25)]) {
               break;
             }
+
+            intensity[tileX][tileY] -= LIGHT_POWER;
+
+            benign[tileX][tileY] = benign[tileX][tileY] && caster.isBenign();
           }
         }
       }

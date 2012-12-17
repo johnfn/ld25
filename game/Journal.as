@@ -33,6 +33,8 @@ package {
     public function show():void {
     	this.contents.visible = true;
     	Fathom.pushMode(C.MODE_JOURNAL);
+
+        this.raiseToTop();
     }
 
     private function renderText():void {

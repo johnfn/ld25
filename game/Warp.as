@@ -13,7 +13,7 @@ package {
       var dest:Object = C.warps[Fathom.mapRef.getTopLeftCorner().divide(25).toString()];
 
       // It's possible there is no entry, in which case it was a one way exit warp.
-      if (dest) {
+      if (dest.dest) {
         setTile(dest.type.x, dest.type.y);
         mapDest = dest.dest;
 

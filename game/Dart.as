@@ -16,6 +16,9 @@ package {
       this.type = type;
       this.vel = speed.clone();
       this.oldLoc = new Vec(this.x, this.y);
+
+      this.width -= 2;
+      this.height -= 2;
     }
 
     public override function update(e:EntitySet):void {
@@ -26,7 +29,11 @@ package {
       }
 
       // Bad hack.
-      if (this.oldLoc.equals(new Vec(this.x, this.y))) {
+      if (this.vel.x != 0 && this.oldLoc.x == this.x) {
+        this.destroy();
+      }
+
+      if (this.vel.y != 0 && this.oldLoc.y == this.y) {
         this.destroy();
       }
 

@@ -4,7 +4,7 @@ package {
 
     public static var size:int = 25;
     public static var dim:Vec = new Vec(25, 25);
-    public static var DEBUG:Boolean = true;
+    public static var DEBUG:Boolean = false;
 
     // Fonts.
 
@@ -79,7 +79,7 @@ package {
       ]
     , [ "ONE GUARD, ONE HALL"
       , "Seems like Daniel has finally wisened up."
-      , "There's no way I can get past here."
+      , "There's no way I can get past here without him seeing me."
       , "Unless..."
       , "I should look around."
       ]
@@ -102,7 +102,8 @@ package {
       ];
 
     public static var gotPoisonDarts:Array = [
-        "I open the chest."
+        "I open the chest and the guy standing right behind it doesn't even notice."
+      , "That's how awesome I am."
       , "Inside, I find *poison darts*."
       , "I can fire them with *Z*."
       , "Interesting..."
@@ -110,7 +111,7 @@ package {
 
     public static var gotTranqDarts:Array = [
         "I open the chest."
-      , "Inside, I find *tranquilizer darts*."
+      , "Inside, I find *sleeping darts*."
       , "They'll make the target fall asleep for a brief period."
       , "I can fire them with *Z*."
       , "Interesting..."
@@ -118,7 +119,7 @@ package {
 
     public static var alreadyHasPoison:Array = [
         "I open the chest."
-      , "Inside, I find *tranquilizer darts*."
+      , "Inside, I find *sleeping darts*."
       , "They'll make the target fall asleep for a brief period."
       , "I'll swap my poison darts for these."
       ];
@@ -130,9 +131,10 @@ package {
       ];
 
     public static var warps:Object = {
-        ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(0, 0) }
-      , ((new Vec(6, 4)).toString()) : { "dest": new Vec(5, 1), "type": new Vec(1, 0) }
+        ((new Vec(3, 5)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(1, 0) }
+      , ((new Vec(6, 4)).toString()) : { "dest": new Vec(5, 1), "type": new Vec(2, 0) }
       , ((new Vec(3, 0)).toString()) : { "dest": new Vec(5, 5), "type": new Vec(1, 0) }
+      , ((new Vec(5, 5)).toString()) : { "type": new Vec(2, 0) }
     };
   }
 }
