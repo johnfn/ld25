@@ -4,6 +4,8 @@ package {
     private var _angle:int = 90;
     public var isOutOfAction:Boolean = false
 
+    public var countdown:int = 0;
+
     function EnemyRotating(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
     }
@@ -15,6 +17,18 @@ package {
     override public function update(e:EntitySet):void {
     	super.update(e);
 
+      if (isOutOfAction) {
+          if (countdown > 0) {
+              countdown--;
+              if (countdown <= 0) {
+                  isOutOfAction = false;
+                  setTile(2, 3);
+              }
+          }
+
+          return;
+      }
+
     	_angle -= 5;
     }
 
@@ -24,6 +38,7 @@ package {
         setTile(0, 6);
       } else {
         setTile(0, 7);
+        countdown = 90;
       }
 
       isOutOfAction = true;

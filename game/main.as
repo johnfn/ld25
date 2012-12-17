@@ -102,7 +102,11 @@ package {
 
       lg = new LightGrid(m);
 
-      main.c = new Character(10 * C.dim.x + 2, 10 * C.dim.y, m, lg);
+      if (C.DEBUG) {
+        main.c = new Character(10 * C.dim.x + 2, 10 * C.dim.y, m, lg);
+      } else {
+        main.c = new Character(7 * C.dim.x + 2, 7 * C.dim.y, m, lg);
+      }
 
       journal = new Journal();
 

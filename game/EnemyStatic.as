@@ -5,6 +5,8 @@ package {
     public var isOutOfAction:Boolean = false
     public static var noWarp:Boolean = true;
 
+    public var countdown:int = 0;
+
     var dir:Vec = new Vec(0, 1);
 
     function EnemyStatic(dir:Vec) {
@@ -18,6 +20,18 @@ package {
     }
 
     override public function update(e:EntitySet):void {
+      if (isOutOfAction) {
+          if (countdown > 0) {
+              countdown--;
+              if (countdown <= 0) {
+                  isOutOfAction = false;
+                  setTile(1, 3);
+              }
+          }
+
+          return;
+      }
+
     	super.update(e);
     }
 
@@ -29,6 +43,7 @@ package {
         Character.murdered = true;
       } else {
         setTile(1, 7);
+        countdown = 90;
       }
 
       isOutOfAction = true;

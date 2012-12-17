@@ -7,7 +7,7 @@ package {
     }
 
     public function open():void {
-    	setTile(0, 0);
+    	setTile(2, 2);
     }
   }
 }

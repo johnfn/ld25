@@ -10,7 +10,7 @@ package {
       if (type == Character.POISON_NEEDLE) {
         loadSpritesheet(C.SpritesClass, C.dim, new Vec(2, 4));
       } else {
-        loadSpritesheet(C.SpritesClass, C.dim, new Vec(2, 3));
+        loadSpritesheet(C.SpritesClass, C.dim, new Vec(2, 5));
       }
 
       this.type = type;

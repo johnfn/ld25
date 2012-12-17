@@ -9,12 +9,13 @@ package {
     private var dir:Vec = new Vec(1, 0);
 
     public static var murdered:Boolean = false;
+    public static var numMurders:int = 0;
 
     public static var NO_NEEDLE:int = 0;
     public static var POISON_NEEDLE:int = 1;
     public static var TRANQ_NEEDLE:int = 2;
 
-    public static var needles:int = NO_NEEDLE;
+    public static var needles:int = C.DEBUG ? TRANQ_NEEDLE : NO_NEEDLE;
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
@@ -138,6 +139,10 @@ package {
       }
 
       checkForWarps();
+
+      if (Fathom.mapRef.getTopLeftCorner().clone().divide(25).equals(new Vec(4, 2))) {
+
+      }
     }
 
     private function checkForWarps():void {
@@ -193,9 +198,10 @@ package {
     }
 
     private function checkForMessage():void {
-      if (!C.mapToJournal.hasOwnProperty(mapRef.getTopLeftCorner().toString())) return;
+      var loc:String = mapRef.getTopLeftCorner().clone().divide(25).toString();
+      if (!C.mapToJournal.hasOwnProperty(loc)) return;
 
-      var curJournal:int = C.mapToJournal[mapRef.getTopLeftCorner().toString()];
+      var curJournal:int = C.mapToJournal[loc];
 
       if (journal.haveSeen(curJournal)) {
         return;

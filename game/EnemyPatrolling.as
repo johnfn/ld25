@@ -4,6 +4,8 @@ package {
     private var _angle:int = 90;
     public var isOutOfAction:Boolean = false
 
+    public var countdown:int = 0;
+
     private static var ROTATION_SPEED:int = 5;
     private static var PATROLLING:int = 0;
     private static var ROTATING:int = 1;
@@ -27,7 +29,17 @@ package {
     	vel.x = 0;
     	vel.y = 0;
 
-        if (isOutOfAction) return;
+        if (isOutOfAction) {
+            if (countdown > 0) {
+                countdown--;
+                if (countdown <= 0) {
+                    isOutOfAction = false;
+                    setTile(2, 3);
+                }
+            }
+
+            return;
+        }
 
     	if (state == PATROLLING) {
     		if (touchingLeft || touchingRight || touchingTop || touchingBottom) {
@@ -54,9 +66,12 @@ package {
     public function die(type:int):void {
       if (type == Character.POISON_NEEDLE) {
         Character.murdered = true;
+        Character.numMurders++;
+
         setTile(2, 6);
       } else {
         setTile(2, 7);
+        countdown = 90;
       }
 
       isOutOfAction = true;

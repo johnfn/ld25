@@ -20,7 +20,7 @@ package {
     private static var SPREAD_ANGLE:int    = 45;
     private static var RAY_COUNT:int       = 9;
     private static var LIGHT_PRECISION:int = RESOLUTION; //smaller == more precise
-    private static var START_DARK:Number   = 0.4;
+    private static var START_DARK:Number   = 0.6;
     private static var LIGHT_POWER:Number  = 0.6; // could be a property of casters.
 
     function LightGrid(mapRef:Map) {
@@ -31,7 +31,7 @@ package {
 
       this.mapRef = mapRef;
 
-      var myBlur:BlurFilter = new BlurFilter(5, 5);
+      var myBlur:BlurFilter = new BlurFilter(90, 90);
       filters = [myBlur];
 
       loadNewMap();
