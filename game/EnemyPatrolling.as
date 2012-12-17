@@ -2,6 +2,7 @@ package {
   public class EnemyPatrolling extends MovingEntity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     private var _angle:int = 90;
+    public var isOutOfAction:Boolean = false
 
     private static var ROTATION_SPEED:int = 5;
     private static var PATROLLING:int = 0;
@@ -55,6 +56,8 @@ package {
       } else {
         setTile(2, 7);
       }
+
+      isOutOfAction = true;
     }
 
     /* ILightSource */
@@ -64,6 +67,10 @@ package {
 	}
 
 	public function power():int {
+      if (isOutOfAction) {
+        return 0;
+      }
+
 		return 10;
 	}
 

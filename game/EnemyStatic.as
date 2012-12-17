@@ -2,6 +2,8 @@ package {
   public class EnemyStatic extends Entity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     public static var noPower:Boolean = false;
+    public var isOutOfAction:Boolean = false
+    public static var noWarp:Boolean = true;
 
     var dir:Vec = new Vec(0, 1);
 
@@ -28,6 +30,9 @@ package {
       } else {
         setTile(1, 7);
       }
+
+      isOutOfAction = true;
+      raiseToTop();
     }
 
     /* ILightSource */
@@ -37,7 +42,11 @@ package {
   	}
 
   	public function power():int {
-      if (EnemyStatic.noPower) {
+      if (isOutOfAction) {
+        return 0;
+      }
+
+      if (EnemyStatic.noPower && EnemyStatic.noWarp) {
         return 1;
       } else {
     		return 10;

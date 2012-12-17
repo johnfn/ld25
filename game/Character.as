@@ -14,7 +14,7 @@ package {
     public static var POISON_NEEDLE:int = 1;
     public static var TRANQ_NEEDLE:int = 2;
 
-    private var needles:int = C.DEBUG ? POISON_NEEDLE : NO_NEEDLE;
+    public static var needles:int = C.DEBUG ? POISON_NEEDLE : NO_NEEDLE;
 
     private var restorePt:Vec = new Vec(2, 2);
     private var lg:LightGrid;
@@ -51,6 +51,7 @@ package {
       var s:Entity = Fathom.entities.get("switch").one();
 
       var dist:Number = Math.abs(c.x - s.x) + Math.abs(c.y - s.y);
+      trace(dist);
 
       return dist < 50;
     }
@@ -95,7 +96,7 @@ package {
     }
 
     public function shootNeedle():void {
-      var d:Entity = new Dart(this.x, this.y, needles, dir.clone().multiply(5));
+      var d:Entity = new Dart(this.x, this.y, needles, angleVec.clone().multiply(12));
     }
 
     override public function update(e:EntitySet):void {
@@ -141,6 +142,7 @@ package {
 
       var warp:Warp = Fathom.entities.get("warp").one() as Warp;
       warp.doWarp(this);
+      EnemyStatic.noWarp = false;
       raiseToTop();
     }
 
@@ -211,7 +213,7 @@ package {
     }
 
     public function power():int {
-      return 10;
+      return 0;
     }
 
     public function angle():int {

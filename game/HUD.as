@@ -13,6 +13,8 @@ package {
       text.color = 0xffffff;
 
       this.c = c;
+
+      this.addChild(text);
   	}
 
   	override public function update(e:EntitySet):void {
@@ -24,8 +26,11 @@ package {
 
       maybeMentionSwitch();
       maybeMentionChest();
+      maybeMentionDarts();
 
   		super.update(e);
+
+      this.raiseToTop();
   	}
 
     public function maybeMentionSwitch():void {
@@ -40,8 +45,19 @@ package {
       }
     }
 
+    public function maybeMentionDarts():void {
+      if (c.canShootNeedle() && !c.canPressSwitch() && !c.canOpenChest()) {
+        if (Character.needles == Character.POISON_NEEDLE) {
+          text.text = "Z to shoot poison dart";
+        }
+        if (Character.needles == Character.TRANQ_NEEDLE) {
+          text.text = "Z to shoot sleeping dart";
+        }
+      }
+    }
+
     override public function groups():Set {
-      return super.groups().concat("no-camera", "non-blocking");
+      return super.groups().concat("no-camera", "non-blocking", "persistent");
     }
 
     override public function modes():Array {

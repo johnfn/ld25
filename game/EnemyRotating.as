@@ -2,6 +2,7 @@ package {
   public class EnemyRotating extends Entity implements ILightSource, IKillable {
     private const SIZE:int = C.size;
     private var _angle:int = 90;
+    public var isOutOfAction:Boolean = false
 
     function EnemyRotating(x:int=0, y:int=0, type:int=0) {
       super(x, y, SIZE, SIZE);
@@ -24,6 +25,8 @@ package {
       } else {
         setTile(0, 7);
       }
+
+      isOutOfAction = true;
     }
 
     /* ILightSource */
@@ -33,6 +36,10 @@ package {
   	}
 
   	public function power():int {
+      if (isOutOfAction) {
+        return 0;
+      }
+
   		return 20;
   	}
 

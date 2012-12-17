@@ -2,6 +2,7 @@ package {
   public class Dart extends MovingEntity {
     private const SIZE:int = C.size;
     private var type:int = 1;
+    private var oldLoc:Vec;
 
     function Dart(x:int, y:int, type:int, speed:Vec) {
       super(x, y, SIZE, SIZE);
@@ -13,10 +14,25 @@ package {
       }
 
       this.type = type;
+      this.vel = speed.clone();
+      this.oldLoc = new Vec(this.x, this.y);
     }
 
     public override function update(e:EntitySet):void {
     	super.update(e);
+
+      if (this.x < 0 || this.y < 0 || this.x >= Fathom.mapRef.width || this.y >= Fathom.mapRef.height) {
+        this.destroy();
+      }
+
+      // Bad hack.
+      if (this.oldLoc.equals(new Vec(this.x, this.y))) {
+        this.destroy();
+      }
+
+      // TERRIBLE hack.
+      this.x += this.vel.x;
+      this.y += this.vel.y;
 
     	var enemies:EntitySet = Fathom.entities.get("enemy");
 
@@ -24,9 +40,16 @@ package {
     		if (en.touchingRect(this)) {
     			var ik:IKillable = (en as IKillable);
 
+          trace("MURDER MURDER DIE HA HA HA");
     			ik.die(this.type);
+
+          this.destroy();
     		}
     	}
+
+      this.x -= this.vel.x;
+      this.y -= this.vel.y;
+      this.oldLoc = new Vec(this.x, this.y);
     }
   }
 }
