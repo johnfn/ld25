@@ -157,8 +157,8 @@ package {
 
       // Draw grid
 
-      for (i = -10; i < pixel_width + 10; i++) {
-        for (j = -10; j < pixel_height + 10; j++) {
+      for (i = -2; i < pixel_width + 2; i++) {
+        for (j = -2; j < pixel_height + 2; j++) {
           var alpha:Number;
           if (i < 0 || i >= pixel_width ||
               j < 0 || j >= pixel_height) {

@@ -23,6 +23,7 @@ package {
         mapDest = dest.dest;
 
         isSourceWarp = true;
+
   	  }
     }
 
@@ -41,6 +42,16 @@ package {
     	c.y = warpDest.y;
 
 	    Fathom.camera.snapTo(c);
+
+      C.inSwamp = !C.inSwamp;
+
+      if (C.inSwamp) {
+        C.infilMusic.stop();
+        C.swampMusic.play(1, 999999);
+      } else {
+        C.swampMusic.stop();
+        C.infilMusic.play(1, 999999);
+      }
     }
 
     public override function groups():Set {

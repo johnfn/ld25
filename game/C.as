@@ -18,6 +18,16 @@ package {
     [Embed(source = "../data/sprites.png")] static public var SpritesClass:Class;
     [Embed(source = "../data/blacksquare.png")] static public var BlackSquareClass:Class;
 
+    //Music
+
+    [Embed(source = "../data/infiltration.mp3")] static public var InfilSndClass:Class;
+    [Embed(source = "../data/swamps.mp3")] static private var SwampsSndClass:Class;
+
+    public static var infilMusic:FSound = new FSound(InfilSndClass).withVolume(0.6);
+    public static var swampMusic:FSound = new FSound(SwampsSndClass).withVolume(0.6);
+
+    public static var inSwamp:Boolean = true;
+
     // Physics.
 
     public static var GRAVITY:Number = 0.4;
@@ -46,8 +56,6 @@ package {
     , [ "RUNNING"
       , "I feel energetic."
       , "I can throw caution to the wind and run with *X*."
-      , "And by the way."
-      , "I can look up these entries to my journal at any time by pressing *J*."
       ]
     , [ "PROBLEMS AHEAD"
       , "There's no way I can sneak past here."
@@ -112,7 +120,8 @@ package {
       , "That's how awesome I am."
       , "Inside, I find *poison darts*."
       , "I can fire them with *Z*."
-      , "Interesting..."
+      , "These will come in handy sooner or later."
+      , "Probably sooner."
       ];
 
     public static var gotTranqDarts:Array = [

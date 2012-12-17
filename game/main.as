@@ -116,6 +116,8 @@ package {
 
       Fathom.start();
       m.visible = true;
+
+      C.swampMusic.play(1, 999999);
     }
   }
 }

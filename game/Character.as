@@ -6,7 +6,7 @@ package {
 
   public class Character extends MovingEntity implements ILightSource {
     private var mapRef:Map;
-    private var dir:Vec = new Vec(1, 0);
+    private var dir:Vec = new Vec(2, 1);
 
     public static var murdered:Boolean = false;
     public static var numMurders:int = 0;
@@ -28,7 +28,7 @@ package {
 
     function Character(x:int, y:int, mapRef:Map, lg:LightGrid) {
       super(x, y, C.size, C.size);
-      loadSpritesheet(C.MapClass, C.dim, new Vec(0, 0));
+      loadSpritesheet(C.SpritesClass, C.dim, new Vec(2, 1));
 
       /*
       animations.addAnimations({ "walk": { startPos: [0, 0], numFrames: 7 }
@@ -228,6 +228,7 @@ package {
       warp.doWarp(this);
       EnemyStatic.noWarp = false;
       raiseToTop();
+
     }
 
     private function checkForTreasure():void {
